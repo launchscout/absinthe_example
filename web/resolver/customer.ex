@@ -14,11 +14,21 @@ defmodule Blog.Resolver.Customer do
     end
   end
 
-  def create(attributes, _) do
-    changeset = Customer.changeset(%Customer{}, attributes)
+  def create(%{customer_attributes: customer_attributes}, _) do
+    changeset = Customer.changeset(%Customer{}, customer_attributes)
     case Repo.insert(changeset) do
       {:ok, customer} -> {:ok, customer}
       {:error, changeset} -> {:error, changeset.errors}
     end
   end
+
+  def update(%{id: id, customer_attributes: customer_attributes}, _) do
+    customer = Repo.get!(Customer, id)
+    changeset = Customer.changeset(customer, customer_attributes)
+    case Repo.update(changeset) do
+      {:ok, customer} -> {:ok, customer}
+      {:error, changeset} -> {:error, changeset.errors}
+    end
+  end
+
 end

@@ -37,6 +37,11 @@ defmodule Blog.Schema.Types do
     field :value, :string
   end
 
+  input_object :customer_input do
+    field :name, :string
+    field :address, :string
+  end
+
   scalar :time do
     description "ISOz time",
     parse &Timex.parse(&1, "{ISOz}")

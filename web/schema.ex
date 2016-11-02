@@ -38,10 +38,14 @@ defmodule Blog.Schema do
     end
 
     field :create_customer, :customer do
-      arg :name, non_null(:string)
-      arg :address, non_null(:string)
-
+      arg :customer_attributes, :customer_input
       resolve &Resolver.Customer.create/2
+    end
+
+    field :update_customer, :customer do
+      arg :id, non_null(:id)
+      arg :customer_attributes, :customer_input
+      resolve &Resolver.Customer.update/2
     end
 
     field :create_user, :user do
