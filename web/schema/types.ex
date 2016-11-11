@@ -8,7 +8,9 @@ defmodule Blog.Schema.Types do
     field :id, :id
     field :name, :string
     field :contact, :contact
-    field :posts, list_of(:post)
+    field :posts, list_of(:post) do
+      arg :limit, :integer
+    end
   end
 
   object :post do
@@ -19,10 +21,18 @@ defmodule Blog.Schema.Types do
     field :author, :user
   end
 
+  object :address do
+    field :id, :id
+    field :line1, :string
+    field :city, :string
+    field :state, :string
+    field :zip, :string
+  end
+
   object :customer do
     field :id, :id
     field :name, :string
-    field :address, :string
+    field :address, :address
     field :pets, list_of(:pet)
   end
 

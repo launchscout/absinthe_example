@@ -4,7 +4,7 @@ defmodule Blog.Resolver.Customer do
   alias Blog.Repo
 
   def all(_, _) do
-    {:ok, Repo.all(Customer) |> Repo.preload(:pets) }
+    {:ok, Repo.all(Customer) |> Repo.preload([:pets, :address]) }
   end
 
   def find(%{id: id}, _) do

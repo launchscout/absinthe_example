@@ -3,8 +3,8 @@ defmodule Blog.Customer do
 
   schema "customers" do
     field :name, :string
-    field :address, :string
     has_many :pets, Blog.Pet, foreign_key: :owner_id
+    belongs_to :address, Blog.Address
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule Blog.Customer do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :address])
-    |> validate_required([:name, :address])
+    |> cast(params, [:name])
+    |> validate_required([:name])
   end
 end
